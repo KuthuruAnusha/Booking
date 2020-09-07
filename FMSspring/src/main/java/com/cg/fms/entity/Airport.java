@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,51 +18,69 @@ public class Airport {
 
 	@Id
 	@Column(name="acode")
-	private String airport_code;
+	private String airportCode;
 	@Column(name="aname")
-	private String airport_name;
+	private String airportName;
 	@Column(name="alocation")
-	private String airport_location;
+	private String airportLocation;
 	
 	@OneToMany(mappedBy = "sourceAirport")
 	@JsonIgnore
 	
-	List<Schedule> source_list = new ArrayList<>();
+	List<Schedule> sourceList = new ArrayList<>();
+	@Transient
+	private int count=sourceList.size();
+	public int getCount()
+	{
+		return sourceList.size();
+	}
+	
 	
 	@OneToMany(mappedBy = "destAirport")
 	@JsonIgnore
-	List<Schedule> dest_list = new ArrayList<>();
+	List<Schedule> destList = new ArrayList<>();
 
-	public String getAirport_code() 
+	public Airport() {
+		super();
+	}
+	public Airport(String airportCode, String airportName, String airportLocation) {
+		super();
+		this.airportCode = airportCode;
+		this.airportName = airportName;
+		this.airportLocation = airportLocation;
+	}
+	public String getairportCode() 
 	{
-		return airport_code;
+		return airportCode;
 	}
-	public List<Schedule> getSource_list() {
-		return source_list;
+	public void setairportCode(String airportCode) {
+		this.airportCode = airportCode;
 	}
-	public void setSource_list(List<Schedule> source_list) {
-		this.source_list = source_list;
+	public List<Schedule> getsourceList() {
+		return sourceList;
 	}
-	public List<Schedule> getDest_list() {
-		return dest_list;
+	public void setsourceList(List<Schedule> sourceList) {
+		this.sourceList = sourceList;
 	}
-	public void setDest_list(List<Schedule> dest_list) {
-		this.dest_list = dest_list;
+	public List<Schedule> getdestList() {
+		return destList;
 	}
-	public void setAirport_code(String airport_code) {
-		this.airport_code = airport_code;
+	public void setdestList(List<Schedule> destList) {
+		this.destList = destList;
 	}
-	public String getAirport_name() {
-		return airport_name;
+	
+	public String getairportName() {
+		return airportName;
 	}
-	public void setAirport_name(String airport_name) {
-		this.airport_name = airport_name;
+	public void setairportName(String airportName) {
+		this.airportName = airportName;
 	}
-	public String getAirport_location() {
-		return airport_location;
+	public String getairportLocation() {
+		return airportLocation;
 	}
-	public void setAirport_location(String airport_location) {
-		this.airport_location = airport_location;
+	public void setairportLocation(String airportLocation) {
+		this.airportLocation = airportLocation;
 	}
+	
 	
 }

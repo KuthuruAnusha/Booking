@@ -1,19 +1,16 @@
 package com.cg.fms.entity;
 
-	import javax.persistence.CascadeType;
+	
 import javax.persistence.Column;
 	import javax.persistence.Entity;
 	import javax.persistence.GeneratedValue;
 	import javax.persistence.GenerationType;
 	import javax.persistence.Id;
-	import javax.persistence.JoinColumn;
-	import javax.persistence.ManyToOne;
+	
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-	
 	@Entity
 
 	@Table(name="passenger_tbl")
@@ -25,14 +22,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 			return "Passenger [id=" + id + ", passengerName=" + passengerName + ", age=" + age + ", gender=" + gender
 					+ "]";
 		}
+	
 		@Id
-		
 		@Column(name="pid")
-		//@GeneratedValue(strategy = GenerationType.AUTO)
+		
 		@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="mygen")
 		@SequenceGenerator(name="mygen",sequenceName="passenger_sequence",allocationSize=1)
 		private int id;
 		
+		public Passenger() {
+			super();
+		}
+		public Passenger(int id, String passengerName, int age, String gender) {
+			super();
+			this.id = id;
+			this.passengerName = passengerName;
+			this.age = age;
+			this.gender = gender;
+		}
 		@Column(name="passenger_name", length=25)
 		private String passengerName;
 		
@@ -43,11 +50,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 		private String gender;
 		
 		
-//		@ManyToOne(cascade = CascadeType.ALL)
-//		@JoinColumn(name="booking_id")
-		@JsonIgnore
-		//private Booking booking = new Booking();
-//		private Booking booking;
+
 		public int getId() {
 			return id;
 		}
@@ -73,15 +76,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 		public void setGender(String gender) {
 			this.gender = gender;
 		}
-		
-		
-//		public Booking getBooking() {
-//			return booking;
-//		}
-//		public void setBooking(Booking booking) {
-//			this.booking = booking;
-//		}
-		
 		
 	}
 

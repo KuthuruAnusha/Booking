@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.fms.entity.Airport;
 import com.cg.fms.entity.Booking;
 import com.cg.fms.entity.BookingInfo;
+import com.cg.fms.entity.Login;
+import com.cg.fms.exception.AirportException;
 import com.cg.fms.exception.BookingException;
 import com.cg.fms.service.BookingService;
 
@@ -31,8 +34,8 @@ public class BookingController {
 	public ResponseEntity<Booking> findAllBookingId(@PathVariable("id") int id) throws BookingException 
 	{
 		Booking  bookings = bookingService.findAllBookingId(id);
-		   ResponseEntity<Booking>  bk = new ResponseEntity<>(bookings,HttpStatus.OK);
-		   return bk;
+		   return new ResponseEntity<>(bookings,HttpStatus.OK);
+		   
 		
 	}
 	
@@ -42,34 +45,20 @@ public class BookingController {
 		System.out.println(info.getPassenger().getPassengerName());
 		Booking b=bookingService.addBooking(info);
 		
-		ResponseEntity<Booking> be=new ResponseEntity<Booking>(b,HttpStatus.OK);
+		return new ResponseEntity<>(b,HttpStatus.OK);
 		
-	return be;
+
 	}
-//	public ResponseEntity<Booking> addBooking(@RequestBody Booking booking) throws BookingException
-//	{
-//		Booking b=bookingService.addBooking(booking);
-//		
-//		
-//		
-////		Booking b=bookingService.addBooking(booking);
-////		
-//	ResponseEntity<Booking> be=new ResponseEntity<Booking>(HttpStatus.OK);
-////		
-//	return be;
-//	}
+	
 
 	@GetMapping("booking")
 	public ResponseEntity<List<Booking>> findAllBookings() throws BookingException
 	{
 		List<Booking> list = bookingService.findAllBookings();
-		ResponseEntity<List<Booking>>  kb = new ResponseEntity<List<Booking>>(list,HttpStatus.OK);
-		return kb;
+		return new ResponseEntity<>(list,HttpStatus.OK);
+		
 			}
-//	public List<Booking> findAllBookings() throws BookingException{
-//		return bookingService.findAllBookings();	
-//	}
-//	
+
 	@DeleteMapping("booking/{id}")
 	public ResponseEntity<Booking> deleteBookingById(@PathVariable("id") int bookingId) throws BookingException
 	{
@@ -78,10 +67,29 @@ public class BookingController {
 		
 		
 	    Booking be = bookingService.deleteBookingById (bookingId);
-		kb= new ResponseEntity<Booking>(be,HttpStatus.OK);
+		 new ResponseEntity<Booking>(be,HttpStatus.OK);
 		
 		return kb;
 	}
+	@GetMapping("admin/login/{user}/{pass}")
+	public ResponseEntity<Login>  findUserLogin(@PathVariable("user") String username, @PathVariable("pass") String password) throws BookingException
+	{
+	  
+		 Login log = bookingService.findUser(username,password);
+		 if(log==null) {
+			 throw new BookingException("Login not successful");
+		 }
+		 return new ResponseEntity<>(log,HttpStatus.OK);
+		
+		
+	}
+	@GetMapping("airport")
+	public ResponseEntity<List<Airport>> findAllAP() throws AirportException
+	{
+		List<Airport> list = bookingService.findAllAP();
+		return new ResponseEntity<>(list,HttpStatus.OK);
+		
+			}
 	
 	
 	}

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 		
 		@Id
 		@Column(name="user_id")
-		//@GeneratedValue(strategy = GenerationType.AUTO)
+		
 		@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="mygen")
 		@SequenceGenerator(name="mygen",sequenceName="user_sequence",allocationSize=1)
 		private int uid;
@@ -28,6 +28,16 @@ import javax.persistence.Table;
 		@Column(name="password", length=25)
 		private String password;
 		
+		public User() {
+			super();
+		}
+		public User(int uid, String userName, String password, String phoneNo) {
+			super();
+			this.uid = uid;
+			this.userName = userName;
+			this.password = password;
+			this.phoneNo = phoneNo;
+		}
 		@Column(name="phone_no")
 		private String phoneNo;
 

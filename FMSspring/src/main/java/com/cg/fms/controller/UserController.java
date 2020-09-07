@@ -24,8 +24,8 @@ public class UserController {
 	{
 		User  users = userService.findUserId(id);
 	
-	   ResponseEntity<User>  us = new ResponseEntity<>(users,HttpStatus.OK);
-	   return us;
+	  return  new ResponseEntity<>(users,HttpStatus.OK);
+	  
 	
 
 	

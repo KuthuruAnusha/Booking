@@ -16,9 +16,17 @@ public class BookingInfo {
 	public void setPassenger(Passenger passenger) {
 		this.passenger = passenger;
 	}
+	public BookingInfo() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "BookingInfo [booking=" + booking + ", passenger=" + passenger + "]";
+	}
+	public BookingInfo(Booking booking, Passenger passenger) {
+		super();
+		this.booking = booking;
+		this.passenger = passenger;
 	}
 
 }

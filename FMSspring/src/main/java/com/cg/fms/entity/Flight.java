@@ -23,30 +23,31 @@ import javax.persistence.Table;
 		@Column(name="fnumber")
 		@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="mygen")
 		@SequenceGenerator(name="mygen",sequenceName="flight_sequence",allocationSize=1)
-		//@GeneratedValue(strategy = GenerationType.AUTO)
-		private int flight_number;
-		@Column(name="fmodel")
-		private String flight_model;
-		@Column(name="carrier_name")
-		private String carrier_name;
-		@Column(name="seat_capacity")
+		private int flightNumber;
 		
-		private int seat_capacity;
+		@Column(name="fmodel")
+		private String flightModel;
+		
+		@Column(name="carrier_name")
+		private String carrierName;
+		
+		@Column(name="seat_capacity")
+		private int seatCapacity;
 		
 		@OneToMany(mappedBy = "flight")
 		@JsonIgnore
 		List<Schedule> list = new ArrayList<>();
-		public int getFlight_number() {
-			return flight_number;
+		public int getflightNumber() {
+			return flightNumber;
 		}
-		public void setFlight_number(int flight_number) {
-			this.flight_number = flight_number;
+		public void setflightNumber(int flightNumber) {
+			this.flightNumber = flightNumber;
 		}
-		public String getFlight_model() {
-			return flight_model;
+		public String getflightModel() {
+			return flightModel;
 		}
-		public void setFlight_model(String flight_model) {
-			this.flight_model = flight_model;
+		public void setflightModel(String flightModel) {
+			this.flightModel = flightModel;
 		}
 		public List<Schedule> getList() {
 			return list;
@@ -54,17 +55,17 @@ import javax.persistence.Table;
 		public void setList(List<Schedule> list) {
 			this.list = list;
 		}
-		public String getCarrier_name() {
-			return carrier_name;
+		public String getcarrierName() {
+			return carrierName;
 		}
-		public void setCarrier_name(String carrier_name) {
-			this.carrier_name = carrier_name;
+		public void setcarrierName(String carrierName) {
+			this.carrierName = carrierName;
 		}
-		public int getSeat_capacity() {
-			return seat_capacity;
+		public int getseatCapacity() {
+			return seatCapacity;
 		}
-		public void setSeat_capacity(int seat_capacity) {
-			this.seat_capacity = seat_capacity;
+		public void setseatCapacity(int seatCapacity) {
+			this.seatCapacity = seatCapacity;
 		}
 		
 

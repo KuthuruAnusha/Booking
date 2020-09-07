@@ -22,8 +22,8 @@ public @ResponseBody ResponseEntity<ErrorInfo>  handleException(BookingException
 	 String uri= req.getRequestURI();
 	 
 	 ErrorInfo  obj = new ErrorInfo(LocalDateTime.now(),message,uri);
-	 ResponseEntity<ErrorInfo>  re = new ResponseEntity<ErrorInfo>(obj,HttpStatus.NOT_FOUND);
-	 return re;
+	return new ResponseEntity<>(obj,HttpStatus.NOT_FOUND);
+	
 }
 
 	

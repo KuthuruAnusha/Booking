@@ -3,7 +3,7 @@
 
 	import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 	import javax.persistence.Entity;
 	import javax.persistence.GeneratedValue;
@@ -23,8 +23,8 @@ import javax.persistence.Column;
 		@Column(name="sch_id")
 		@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="mygen")
 		@SequenceGenerator(name="mygen",sequenceName="schedule_seq",allocationSize=1)
-		//@GeneratedValue(strategy = GenerationType.AUTO)
 		private int scheduleId;
+		
 		@ManyToOne
 		@JoinColumn(name="sairport")
 		private Airport sourceAirport;
@@ -35,6 +35,25 @@ import javax.persistence.Column;
 		
 		@Column(name="arr_dat_time")
 		private LocalDate arrivalDate;
+		public Schedule() {
+			super();
+		}
+
+
+		public Schedule(int scheduleId, Airport sourceAirport, Airport destAirport, LocalDate arrivalDate,
+				LocalDate departureDate, String arrivalTime, String departureTime, Flight flight) {
+			super();
+			this.scheduleId = scheduleId;
+			this.sourceAirport = sourceAirport;
+			this.destAirport = destAirport;
+			this.arrivalDate = arrivalDate;
+			this.departureDate = departureDate;
+			this.arrivalTime = arrivalTime;
+			this.departureTime = departureTime;
+			this.flight = flight;
+		}
+
+
 		@Column(name="dept_dat_time")
 		private LocalDate departureDate;
 		
@@ -67,10 +86,7 @@ import javax.persistence.Column;
 		@JoinColumn(name="fnumber")
 		private Flight flight;
 		
-//		@ManyToOne
-//		@JoinColumn(name="fnumber")
-//		private Flight flightNumber;
-//		
+
 
 
 		public int getScheduleId() {

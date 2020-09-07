@@ -1,32 +1,27 @@
 package com.cg.fms.entity;
+import java.time.LocalDate;
 
 
-	import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-	import javax.persistence.Entity;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-	import javax.persistence.JoinColumn;
-	import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.cg.fms.exception.BookingException;
 
-	
+
 
 	@Entity
 	@Table(name="booking_tbl")
 	public class Booking {
 		@Id
 		@Column(name="booking_id", length=10)
-		//@GeneratedValue(strategy = GenerationType.AUTO)
+		
 		@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="mygen")
 		@SequenceGenerator(name="mygen",sequenceName="booking_seq",allocationSize=1)
 		private int bookingId;
@@ -38,34 +33,35 @@ import com.cg.fms.exception.BookingException;
 		@Column(name="ticket_cost")
 		private int cost;
 		
-		//@OneToMany(mappedBy = "booking")
-//		private List<Passenger> passengerList=new ArrayList<Passenger>();
-//		
-//		
-//		
-//		
-//		public List<Passenger> getPassengerList() {
-//			return passengerList;
-//		}
-//		public void setPassengerList(List<Passenger> passengerList) {
-//			this.passengerList = passengerList;
-//		}
+		
+		public Booking() {
+			super();
+		}
+		public Booking(int bookingId, LocalDate bookingDate, int noOfSeats, int cost
+				) {
+			super();
+			this.bookingId = bookingId;
+			this.bookingDate = bookingDate;
+			this.noOfSeats = noOfSeats;
+			this.cost = cost;
+			
+		}
 		@ManyToOne
 		@JoinColumn(name="user_id")
-		//private User user = new User();
+		
 		private User user;
 		@ManyToOne
 		@JoinColumn(name="sch_id")
 		private Schedule schedule;
-		//private Schedule schedule = new Schedule();
 		
-////		@ManyToOne(cascade = CascadeType.ALL)
-////		@JoinColumn(name="fnumber")
-////		private Flight flight;
-////		
+		
 		@ManyToOne
 		@JoinColumn(name="pid")
 		private Passenger passenger;
+		
+
+
+		
 		
 		public Passenger getPassenger() {
 			return passenger;
@@ -73,12 +69,7 @@ import com.cg.fms.exception.BookingException;
 		public void setPassenger(Passenger passenger) {
 			this.passenger = passenger;
 		}
-//		public Flight getFlight() {
-//			return flight;
-//		}
-//		public void setFlight(Flight flight) {
-//			this.flight = flight;
-//		}
+	
 		public int getBookingId() {
 			return bookingId;
 		}
@@ -125,6 +116,5 @@ import com.cg.fms.exception.BookingException;
 		
 		
 	}
-//	
-////	}
+
 	
